@@ -1,12 +1,12 @@
-
-
 const express = require('express').Router();
 const { v4: uuid } = require('uuid');
 const fs = require('fs');
 const { stringify } = require('querystring');
 
+
+// will read what is in db json, should show up in /notes
 express.get('/notes', (req, res) => {
-    fs.readFile('db/db.json', 'utf8', (err, data) => {
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
         } else {
@@ -16,8 +16,9 @@ express.get('/notes', (req, res) => {
         }
     }
     )
-});
+})
 
+// for posting into db.json 
 express.post('/notes', (req, res) => {
     const { title, text } = req.body
     if (req.body) {
@@ -26,13 +27,13 @@ express.post('/notes', (req, res) => {
             text,
             id: uuid(),
         }
-        fs.readFile('db/db.json', 'utf8', (err, data) => {
+        fs.readFile('./db/db.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
                 const parsedNote = JSON.parse(data);
                 parsedNote.push(newNote);
-                fs.writeFile('db/db.json', JSON.stringify(parsedNote, null, 4), (err, data) => {
+                fs.writeFile('./db/db.json', JSON.stringify(parsedNote, null, 4), (err, data) => {
                     if (err) {
                         console.error(err);
                     } else {
