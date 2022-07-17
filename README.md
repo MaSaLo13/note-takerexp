@@ -1,4 +1,4 @@
-# note-takerexp
+# Note-TakerExp
 
 
 
@@ -9,8 +9,12 @@
 - When you click on the red icon, it will delete the note. 
 
 
+## Screenshot
+
+![Screenshot of notetaker](./assets/notetaker.png)
+
 ## Links
 GitHub Link: https://github.com/MaSaLo13/note-takerexp
 
-Heroku Link: 
+Heroku Link: https://guarded-gorge-65781.herokuapp.com/
 
