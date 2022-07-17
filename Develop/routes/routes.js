@@ -16,7 +16,7 @@ express.get('/notes', (req, res) => {
         }
     }
     )
-})
+});
 
 // for posting into db.json 
 express.post('/notes', (req, res) => {
@@ -45,5 +45,25 @@ express.post('/notes', (req, res) => {
         })
     }
 });
+
+express.delete('/notes/:id', (req,res) => {
+    fs.readFile('db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            const parsedNote = JSON.parse(data);
+            const filteredArray = parsedNote.filter(note => req.params.id !== note.id)
+            fs.writeFile('db/db.json', JSON.stringify(filteredArray, null, 4), (err, data) => {
+                if (err) {
+                    console.error(err);
+                } else {
+                    res.json(data);
+                    console.log('Successfully deleted from file');
+                }
+            })
+        }
+    })
+});
+
 
 module.exports = express;
